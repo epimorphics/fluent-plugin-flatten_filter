@@ -19,7 +19,7 @@ ${AUTH}:
 ${GEM}: ${SPEC} VERSION
 	gem build ${SPEC}
 
-all: publish
+all: gem
 
 auth: ${AUTH}
 

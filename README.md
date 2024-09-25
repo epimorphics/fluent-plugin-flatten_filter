@@ -10,16 +10,16 @@ Fluentd Filter plugin to de-dot field name for elasticsearch.
 <filter **>
   @type             flatten
   enabled           true
-  key               kubernetes.labels
+  field             app.kubernetes.io/
   recurse           false
   separator         _
 </filter>
 ```
 
-## parameters
+## Parameters
 
 * `enabled` (default: true)
-* `field`
+* `field`   Regex of key fields to be flattenned
 * `recurse` (default: false)
 * `separator` (default: '_')
 

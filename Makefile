@@ -42,8 +42,8 @@ realclean: clean
 tags:
 	@echo version=${VERSION}
 
-test: gem
-	@bundle install
+test:
+	@bundle exec rspec
 
 vars:
 	@echo "GEM"	= ${GEM}

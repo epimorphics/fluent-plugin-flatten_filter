@@ -40,10 +40,18 @@ module Fluent::Plugin
     end
 
     def flatten(record)
+      unless @field.to_s.length > 0
+        raise Fluent::ConfigError, "Invalid invocation: field not defined"
+      end
+
       newrecord = {}
 
       record.each do |key, value|
-        newkey = key.gsub(/\./, @separator)
+        if key.match(@field)
+          newkey = key.gsub(/\./, @separator)
+        else
+          newkey = key
+        end
 
         # Recurse hashes and arrays:
         if @recurse

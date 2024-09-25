@@ -33,6 +33,17 @@ class TestFlattenFilter
         expect(@filter.flatten({})).to eq Hash.new
       end
 
+      it "no error with disabled" do
+        @filter.enabled = false
+        test_hash = {}
+        test_hash["key"] = "value"
+        test_hash["key.dot"] = "value.dot"
+        expect_hash = {}
+        expect_hash["key"] = "value"
+        expect_hash["key.dot"] = "value.dot"
+        expect(@filter.filter("tag", "time", test_hash)).to eq expect_hash
+      end
+
       it "no error with non recursive hash" do
         @filter.recurse = false
         test_hash = {}
@@ -41,7 +52,7 @@ class TestFlattenFilter
         expect_hash = {}
         expect_hash["key"] = test_hash["key"]
         expect_hash["key_dot"] = test_hash["key.dot"]
-        expect(@filter.flatten(test_hash)).to eq expect_hash
+        expect(@filter.filter("tag", "time", test_hash)).to eq expect_hash
       end
 
       it "no error with recursive hash with de_dot_nested = false" do
@@ -59,7 +70,7 @@ class TestFlattenFilter
         expect_hash = {}
         expect_hash["key"] = "value"
         expect_hash["child_dot"] = expect_child_hash
-        expect(@filter.flatten(test_hash)).to eq expect_hash
+        expect(@filter.filter("tag", "time", test_hash)).to eq expect_hash
       end
 
       it "no error with recursive hash with de_dot_nested = true" do
@@ -77,7 +88,7 @@ class TestFlattenFilter
         expect_hash = {}
         expect_hash["key"] = "value"
         expect_hash["child_dot"] = expect_child_hash
-        expect(@filter.flatten(test_hash)).to eq expect_hash
+        expect(@filter.filter("tag", "time", test_hash)).to eq expect_hash
       end
 
       it "no error with recursive array with de_dot_nested = false" do
@@ -103,7 +114,7 @@ class TestFlattenFilter
         expect_hash = {}
         expect_hash["key"] = "value"
         expect_hash["child_dot"] = expect_child_array
-        expect(@filter.flatten(test_hash)).to eq expect_hash
+        expect(@filter.filter("tag", "time", test_hash)).to eq expect_hash
       end
 
       it "no error with recursive array with de_dot_nested = true" do
@@ -129,7 +140,7 @@ class TestFlattenFilter
         expect_hash = {}
         expect_hash["key"] = "value"
         expect_hash["child_dot"] = expect_child_array
-        expect(@filter.flatten(test_hash)).to eq expect_hash
+        expect(@filter.filter("tag", "time", test_hash)).to eq expect_hash
       end
 
     end

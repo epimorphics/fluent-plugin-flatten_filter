@@ -29,7 +29,11 @@ module Fluent::Plugin
 
     def filter(tag, time, record)
       begin
-        flatten(record) if @enabled
+        if @enabled
+          flatten(record)
+        else
+          record
+        end
       rescue => e
         router.emit_error_event(tag, time, record, e)
       end

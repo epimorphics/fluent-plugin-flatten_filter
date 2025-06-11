@@ -24,7 +24,8 @@ Fluentd Filter plugin to de-dot field name for elasticsearch.
 * `separator` (default: '_')
 
 `separator` cannot be or contain '.'.
-`recurce` will cause the plugin to recurse through nested structures (hashes and arrays), and flatten in those key-names too.
+
+`recurse` will cause the plugin to recurse through nested structures (hashes and arrays), and flatten in those key-names too.
 
 ## License
 
